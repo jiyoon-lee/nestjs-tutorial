@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      function zzz() {
+        const myPhone = document.getElementById("myPhone").value;
+
+        axios
+          .post("http://localhost:3000/token/phone", {
+            qqq: myPhone,
+          })
+          .then((res) => {
+            document.getElementById("result").innerText = res.data;
+          });
+      }
+
+      function signup() {
+        axios.post("http://localhost:3000/users");
+      }
+    </script>
+    <title>회원가입 연습하기</title>
+  </head>
+  <body>
+    휴대폰번호: <input type="text" id="myPhone" /><button onclick="zzz()">
+      인증하기
+    </button>
+    <div id="result">인증상태</div>
+    <button onclick="signup()">회원가입하기</button>
+  </body>
+</html>
