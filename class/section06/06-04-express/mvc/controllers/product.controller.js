@@ -1,20 +1,22 @@
-import { CashService } from "./services/cash.service.js";
-import { ProductService } from "./services/product.service.js";
-
 export class ProductController {
-  buyProduct = (req, res) => {
-    const cashService = new CashService();
-    const hasMoney = cashService.checkValue();
+  cashService;
+  productService;
 
-    const productService = new ProductService();
-    const isSoldOut = productService.checkSoldOut();
+  constructor(cashService, productService) {
+    this.cashService = cashService;
+    this.productService = productService;
+  }
+
+  buyProduct = (req, res) => {
+    const hasMoney = this.cashService.checkValue();
+
+    const isSoldOut = this.productService.checkSoldOut();
 
     if (hasMoney && !isSoldOut) res.send("상품 구매 완료!!");
   };
 
   refundProduct = (req, res) => {
-    const productService = new ProductService();
-    const isSoldOut = productService.checkSoldOut();
+    const isSoldOut = this.productService.checkSoldOut();
 
     if (isSoldOut) {
       res.send("상품 환불 완료!!");
